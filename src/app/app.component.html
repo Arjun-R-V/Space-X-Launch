@@ -1,0 +1,45 @@
+<div class="container">
+  <h2>SpaceX Launch Programs</h2>
+  <div class="row">
+    <div class="col-md-2">
+      <h4>Filters</h4>
+      <h6 class="text-center sub-heading">Launch Year</h6>
+      <span *ngFor="let launchYear of launchYears">
+        <button id="launch_year" type="button" class="btn btn-success filter-buttons"
+          [class.selected]="launchYear === selectedLaunchYear"
+          (click)="onLaunchYear(launchYear)">{{launchYear}}</button>
+      </span>
+      <br>
+      <h6 class="text-center sub-heading">Successful Launch</h6>
+      <span *ngFor="let booleanButton of booleanButtons">
+        <button type="button" class="btn btn-success filter-buttons"
+          [class.selected]="booleanButton === selectedSuccessfulLaunch"
+          (click)="onSuccessfulLaunch(booleanButton)">{{booleanButton}}</button>
+      </span>
+      <br>
+
+      <h6 class="text-center sub-heading">Successful Landing</h6>
+      <span *ngFor="let booleanButton of booleanButtons">
+        <button type="button" class="btn btn-success filter-buttons"
+          [class.selected]="booleanButton === selectedSuccessfulLand"
+          (click)="onSuccessfulLand(booleanButton)">{{booleanButton}}</button>
+      </span>
+
+    </div>
+    <div class="col-md-10">
+      <span *ngFor="let flight of flights">
+        <div class="card flight-card">
+          <div class="card-body">
+            <p class="card-text text-center"><img src="{{flight.links.mission_patch_small}}" class="flight-image"
+                alt="Flight Image" /></p>
+            <p class="card-text flight-name">{{flight.mission_name}} #{{flight.flight_number}}</p>
+            <p class="card-text"><b>Mission Ids: </b> <span *ngFor="let missionId of flight.mission_id"><li>{{missionId}}</li></span></p>
+            <p class="card-text"><b>Launch Year: </b>{{flight.launch_year}}</p>
+            <p class="card-text"><b>Successful Launch: </b>{{flight.launch_success}}</p>
+            <p class="card-text"><b>Successful Landing: </b> <span *ngFor="let core of flight.rocket.first_stage.cores">{{core.land_success}}</span> {{flight.land_success}}</p>
+          </div>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>
